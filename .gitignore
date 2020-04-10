@@ -1,7 +1,7 @@
 
 *.db
 *.opendb
-.vs/Clusterize/v15/Browse.VC.db
+.vs/*
 *.tlog
 *.idb
 *.obj
