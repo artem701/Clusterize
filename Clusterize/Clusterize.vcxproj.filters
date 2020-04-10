@@ -29,9 +29,6 @@
     <ClInclude Include="point.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="clusters.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="cluster.h">
       <Filter>Файлы заголовков\clusters</Filter>
     </ClInclude>

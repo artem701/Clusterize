@@ -121,7 +121,6 @@
   <ItemGroup>
     <ClInclude Include="branch.h" />
     <ClInclude Include="cluster.h" />
-    <ClInclude Include="clusters.h" />
     <ClInclude Include="leave.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="SortedPair.h" />

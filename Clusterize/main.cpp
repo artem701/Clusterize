@@ -1,5 +1,8 @@
 ﻿
-#include "clusters.h"
+#include "cluster.h"
+
+#include "point.h"
+
 /*
 
 
@@ -42,5 +45,6 @@ void A::flush(std::ofstream &)
 
 int main(void)
 {
+	Cluster<Point>* c = Cluster<Point>::clusterize(std::list<Point>());
 	return 0;
 }

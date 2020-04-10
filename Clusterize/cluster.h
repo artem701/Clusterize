@@ -1,30 +1,27 @@
 ﻿#pragma once
 
 #include "leave.h"
-#include "branch.h"
 
 #include "SortedPair.h"
-
+#include <list>
 
 template <class T>
 class Cluster
 {
 public:
 
-	typedef typename std::list<typename Cluster<T>*>::iterator iterator;
-
 	// Основной алгоритм кластеризации
-	Cluster(std::list<T>);
+	static Cluster<T>* clusterize(std::list<T>);
 
 	int save(const char*) const;
 
-	// Возвращает центр кластера
-	virtual T mid() const = 0;
-
 	// Возвращает список всех объектов кластера
-	virtual std::list<T> tolist() const = 0;
+	virtual std::list<T> tolist() const;
 
 protected:
+
+	// Возвращает центр кластера
+	virtual T mid() const = 0;
 
 	// Для вызова из родителя
 	virtual int save(std::ofstream&) const = 0;
@@ -36,6 +33,7 @@ protected:
 // РЕАЛИЗАЦИЯ
 
 template<class T>
-inline Cluster<T>::Cluster(std::list<T> list_of_elems)
+inline Cluster<T>* Cluster<T>::clusterize(std::list<T>)
 {
+	return NULL;
 }

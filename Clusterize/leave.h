@@ -1,6 +1,7 @@
 ﻿#pragma once
 
-#include "cluster.h"
+template <class T>
+class Cluster;
 #include <list>
 
 
