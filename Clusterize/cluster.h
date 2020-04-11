@@ -8,8 +8,6 @@
 #include <iterator>
 #include <fstream>
 
-#define CLEAR_SEGMENTS
-
 /*
 	Требования к T
 
@@ -81,14 +79,8 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 		Branch<T>* new_cluster = new Branch<T>(shortest.first, shortest.second);
 		clusters.remove(shortest.first);
 		clusters.remove(shortest.second);
-		//segments.erase(segments.begin());
+		segments.erase(segments.begin());
 
-// Следует ли очищать информацию о расстояниях
-// между поглощенными кластерами?
-// + O(n^2) - не меняет сложность, но увеличиват время
-// Сокращает использование памяти
-// Вероятно, при большом количестве элементов (потребуется выделение доп. памяти), следует
-#ifdef CLEAR_SEGMENTS
 		// Удаляем каждый отрезок, включающий хотя бы одну из поглощенных вершин
 		for (auto it = segments.begin(); it != segments.end();)
 			if ((it->first  == shortest.first) || (it->first  == shortest.second) ||
@@ -100,7 +92,6 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 			{
 				++it;
 			}
-#endif // CLEAR_SEGMENTS
 
 		// Подсчет новых расстояний
 		for (Cluster<T>* c : clusters)

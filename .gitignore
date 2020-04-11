@@ -6,3 +6,9 @@
 *.obj
 */Debug/*
 *.tlog
+*.pdb
+Debug/Clusterize.ilk
+*.ilk
+*.ilk
+*.tlog
+*.tlog
