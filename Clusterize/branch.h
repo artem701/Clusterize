@@ -15,7 +15,7 @@ public:
 
 	std::list<T> tolist() const override;
 	T mid() const override;
-	int save(std::ofstream&) const override;
+	void save(std::ofstream&) const override;
 
 	~Branch();
 };
@@ -51,4 +51,20 @@ template<class T>
 inline T Branch<T>::mid() const
 {
 	return average;
+}
+
+template<class T>
+inline void Branch<T>::save(std::ofstream & of) const
+{
+	of << "{";
+	t1->save;
+	t2->save;
+	of << "}";
+}
+
+template<class T>
+inline Branch<T>::~Branch()
+{
+	delete t1;
+	delete t2;
 }

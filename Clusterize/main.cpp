@@ -1,7 +1,7 @@
 ﻿
+#include "point.h"
 #include "cluster.h"
 
-#include "point.h"
 
 /*
 

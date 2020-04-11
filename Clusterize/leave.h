@@ -1,8 +1,10 @@
 ﻿#pragma once
 
+#include <list>
+#include <fstream>
+
 template <class T>
 class Cluster;
-#include <list>
 
 
 template <class T>
@@ -14,15 +16,14 @@ public:
 
 	std::list<T> tolist() const override;
 	T mid() const override;
-	int save(std::ofstream&) const override;
+	void save(std::ofstream&) const override;
 };
 
 // РЕАЛИЗАЦИЯ
 
 template<class T>
-inline Leave<T>::Leave(const T & _val)
+inline Leave<T>::Leave(const T & _val) : val(_val)
 {
-	val = _val;
 }
 
 template<class T>
@@ -35,4 +36,12 @@ template<class T>
 inline T Leave<T>::mid() const
 {
 	return val;
+}
+
+template<class T>
+inline void Leave<T>::save(std::ofstream & of) const
+{
+	of << "(";
+	val.flush(of);
+	of << ")";
 }

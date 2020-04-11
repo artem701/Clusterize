@@ -1,8 +1,8 @@
 
 *.db
 *.opendb
-.vs/*
 *.tlog
 *.idb
 *.obj
 */Debug/*
+*.tlog

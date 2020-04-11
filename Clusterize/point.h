@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-/* Кластеризуемый класс точки в n-мерном пространстве */
+// Кластеризуемый класс точки в n-мерном пространстве
 class Point {
 	std::vector<double> coords;
 	int n;
@@ -20,5 +20,5 @@ public:
 
 	int dimensions() const;
 
-	bool operator <(const Point&) const;
+	//bool operator <(const Point&) const;
 };

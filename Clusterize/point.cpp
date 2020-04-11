@@ -1,20 +1,5 @@
 ﻿#include "point.h"
 
-#include <cstdarg>
-
-/*
-Point::Point(unsigned int n, ...)
-{
-	this->n = n;
-
-	va_list vl;
-	va_start(vl, n);
-
-	for (; n > 0; --n)
-		coords.push_back(va_arg(vl, double));
-
-	va_end(vl);
-}*/
 
 Point::Point(const std::vector<double>& coords)
 {
@@ -24,7 +9,7 @@ Point::Point(const std::vector<double>& coords)
 
 double Point::operator[](int i) const
 {
-	return coords[i];
+	return coords.at(i);
 }
 
 double Point::Distance(const Point& a, const Point& b)
@@ -61,6 +46,7 @@ Point Point::Average(std::list<Point> l)
 
 void Point::flush(std::ofstream& ofs) const
 {
+	// переделать
 	ofs << n;
 	for (int i = 0; i < n; ++i)
 		ofs << coords[i];
@@ -70,11 +56,11 @@ int Point::dimensions() const
 {
 	return n;
 }
-
+/*
 bool Point::operator<(const Point & a) const
 {
 	if (n != a.n)
-		throw std::exception("Incompatible comparison int Point::operator<");
+		throw std::exception("Incompatible comparison in Point::operator<");
 
 	for (int i = 0; i < n; ++i)
 	{
@@ -84,4 +70,4 @@ bool Point::operator<(const Point & a) const
 			return false;
 	}
 	return false;
-}
+}*/
