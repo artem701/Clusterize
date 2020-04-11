@@ -1,5 +1,6 @@
 #pragma once
 
+// Класс отрезка, хранит две точки типа T и расстояние между ними
 template <typename T>
 struct Segment
 {

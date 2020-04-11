@@ -38,7 +38,7 @@
     <ClInclude Include="leave.h">
       <Filter>Файлы заголовков\clusters</Filter>
     </ClInclude>
-    <ClInclude Include="SortedPair.h">
+    <ClInclude Include="segment.h">
       <Filter>Файлы заголовков\clusters</Filter>
     </ClInclude>
   </ItemGroup>

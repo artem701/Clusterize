@@ -121,9 +121,9 @@
   <ItemGroup>
     <ClInclude Include="branch.h" />
     <ClInclude Include="cluster.h" />
+    <ClInclude Include="segment.h" />
     <ClInclude Include="leave.h" />
     <ClInclude Include="point.h" />
-    <ClInclude Include="SortedPair.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

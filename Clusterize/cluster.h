@@ -2,12 +2,13 @@
 
 #include "branch.h"
 
-#include "SortedPair.h"
 #include "segment.h"
 #include <list>
-#include <map>
 #include <set>
+#include <iterator>
 #include <fstream>
+
+#define CLEAR_SEGMENTS
 
 /*
 	Требования к T
@@ -43,8 +44,7 @@ protected:
 	// Для вызова из родителя
 	virtual void save(std::ofstream&) const = 0;
 
-	typedef SortedPair<Cluster<T>*> Segment;
-	//typedef Segment<Cluster<T>*> Segment;
+	typedef Segment<Cluster<T>*> Segment;
 
 };
 
@@ -53,6 +53,9 @@ protected:
 template<class T>
 inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 {
+	if (elems_list.empty())
+		return nullptr;
+
 	std::list<Cluster<T>*> clusters;
 	
 	// Инициализация исходного состояния алгоритма
@@ -60,32 +63,53 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 		clusters.push_back(new Leave<T>(el));
 
 	// Начальный расчёт всех расстояний
-	std::map<Segment, double> distances;
+	std::set<Segment> segments;
 	for (auto i = clusters.begin(); (i != clusters.end()) && ((i + 1) != clusters.end()); ++i)
 		for (auto j = i + 1; j != clusters.end(); ++j)
-			distances[Segment(*i, *j)] = T::Distance(*i->mid(), *j->mid());
+			segments.insert(Segment(*i, *j, T::Distance(*i->mid(), *j->mid())));
 
 	// Основная фаза алгоритма
 	while (clusters.size() > 1)
 	{
 		// Поиск ближайших кластеров
-		Segment shortest = distances.begin()->first;
-		double min = distances.begin()->second;
-		for (auto& d : distances)
-			if (d.second < min)
+		// В силу упорядоченности множества это первый элемент
+		Segment shortest = *segments.begin();
+
+		// Объединение кластеров и очистка устаревшей информации
+		Branch<T>* new_cluster = new Branch<T>(shortest.first, shortest.second);
+		clusters.remove(shortest.first);
+		clusters.remove(shortest.second);
+		//segments.erase(segments.begin());
+
+// Следует ли очищать информацию о расстояниях
+// между поглощенными кластерами?
+// + O(n^2) - не меняет сложность, но увеличиват время
+// Сокращает использование памяти
+// Вероятно, при большом количестве элементов (потребуется выделение доп. памяти), следует
+#ifdef CLEAR_SEGMENTS
+		// Удаляем каждый отрезок, включающий хотя бы одну из поглощенных вершин
+		for (auto it = segments.begin(); it != segments.end();)
+			if ((it->first  == shortest.first) || (it->first  == shortest.second) ||
+				(it->second == shortest.first) || (it->second == shortest.second))
 			{
-				min = d.second;
-				shortest = d.first;
+				it = segments.erase(it);
 			}
+			else
+			{
+				++it;
+			}
+#endif // CLEAR_SEGMENTS
 
-		// Объединение кластеров
-		Branch<T> new_cluster = new Branch<T>(shortest.val[0], shortest.val[1]);
-		clusters.remove(shortest.val[0]);
-		clusters.remove(shortest.val[1]);
+		// Подсчет новых расстояний
+		for (Cluster<T>* c : clusters)
+			segments.insert(Segment(c, new_cluster, T::Distance(c->mid(), new_cluster->mid())));
 
+		// Наконец, добавление сформированного кластера в список
+		clusters.push_back(new_cluster);
 	}
 
-	return NULL;
+	// Возвращаем последний оставшийся кластер в списке
+	return clusters.front();
 }
 
 // Сохранение в файл в виде:
