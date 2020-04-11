@@ -2,6 +2,10 @@
 #include "point.h"
 #include "cluster.h"
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <list>
 
 /*
 
@@ -43,8 +47,31 @@ void A::flush(std::ofstream &)
 }
 */
 
+using namespace std;
+
 int main(void)
 {
-	Cluster<Point>* c = Cluster<Point>::clusterize(std::list<Point>());
+	ifstream ifs = ifstream("in.txt");
+	//ofstream ofs = ofstream("out.txt");
+
+	int n; ifs >> n;
+	list<Point> l;
+
+	while (!ifs.eof())
+	{
+		vector<double> v;
+		for (int i = 0; i < n; ++i)
+		{
+			double x;
+			ifs >> x;
+			v.push_back(x);
+		}
+		l.push_back(Point(v));
+	}
+
+	Cluster<Point>* c = Cluster<Point>::clusterize(l);
+	c->save("out.txt");
+	delete c;
+
 	return 0;
 }

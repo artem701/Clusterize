@@ -38,11 +38,10 @@ Point Point::Average(std::list<Point> l)
 	for (int j = 0; j < n; ++j)
 	{
 		double sum = 0.0;
-		std::list<Point>::iterator i;
-		for (i = l.begin(); i != l.end(); ++i)
+		for (auto i = l.begin(); i != l.end(); ++i)
 			sum += i->coords[j];
 		
-		midcoords[j] = sum / sz;
+		midcoords[j] = sum / (double)(sz);
 	}
 
 	return Point(midcoords);
@@ -51,9 +50,9 @@ Point Point::Average(std::list<Point> l)
 void Point::flush(std::ofstream& ofs) const
 {
 	// переделать
-	ofs << n;
-	for (int i = 0; i < n; ++i)
-		ofs << coords[i];
+	for (int i = 0; i < n-1; ++i)
+		ofs << coords[i] << ", ";
+	ofs << coords[n - 1];
 }
 
 int Point::dimensions() const

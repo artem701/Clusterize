@@ -56,10 +56,10 @@ inline T Branch<T>::mid() const
 template<class T>
 inline void Branch<T>::save(std::ofstream & of) const
 {
-	of << "{";
+	of << "{\n\t";
 	t1->save(of);
 	t2->save(of);
-	of << "}";
+	of << "\t\n}";
 }
 
 template<class T>

@@ -64,7 +64,7 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 		clusters.push_back(new Leave<T>(el));
 
 	// Начальный расчёт всех расстояний
-	std::set<Segment> segments;
+	std::multiset<Segment> segments;
 	auto next = clusters.begin();
 	for (auto i = clusters.begin(); (i != clusters.end()) && (next = i, ++next, next != clusters.end()); ++i)
 		for (auto j = next; j != clusters.end(); ++j)
