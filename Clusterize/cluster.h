@@ -38,6 +38,8 @@ public:
 	// Для вызова из родителя
 	virtual void save(std::ofstream&) const = 0;
 
+	virtual ~Cluster() { }
+
 protected:
 
 	// Возвращает центр кластера
@@ -116,6 +118,7 @@ inline int Cluster<T>::save(const char * fname) const
 		return 1;
 
 	this->save(of);
+	of.close();
 
 	return 0;
 }

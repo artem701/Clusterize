@@ -12,3 +12,7 @@ Debug/Clusterize.ilk
 *.ilk
 *.tlog
 *.tlog
+*.tlog
+*.idb
+*.pdb
+*.pdb
