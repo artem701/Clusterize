@@ -13,6 +13,8 @@
 /*
 	Требования к T
 
+	Наличие кончтруктора по умолчанию
+
 	double static T::Distance(const T&, const T&)
 		Условное расстояние между двумя объектами
 
@@ -27,7 +29,6 @@ template <class T>
 class Cluster
 {
 public:
-
 	// Основной алгоритм кластеризации
 	static Cluster<T>* clusterize(std::list<T>);
 
@@ -36,13 +37,13 @@ public:
 	// Возвращает список всех объектов кластера
 	virtual std::list<T> tolist() const = 0;
 
+	// Для вызова из родителя
+	virtual void save(std::ofstream&) const = 0;
+
 protected:
 
 	// Возвращает центр кластера
 	virtual T mid() const = 0;
-
-	// Для вызова из родителя
-	virtual void save(std::ofstream&) const = 0;
 
 	typedef Segment<Cluster<T>*> Segment;
 
@@ -64,9 +65,10 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 
 	// Начальный расчёт всех расстояний
 	std::set<Segment> segments;
-	for (auto i = clusters.begin(); (i != clusters.end()) && ((i + 1) != clusters.end()); ++i)
-		for (auto j = i + 1; j != clusters.end(); ++j)
-			segments.insert(Segment(*i, *j, T::Distance(*i->mid(), *j->mid())));
+	auto next = clusters.begin();
+	for (auto i = clusters.begin(); (i != clusters.end()) && (next = i, ++next, next != clusters.end()); ++i)
+		for (auto j = next; j != clusters.end(); ++j)
+			segments.insert(Segment(*i, *j, T::Distance((*i)->mid(), (*j)->mid())));
 
 	// Основная фаза алгоритма
 	while (clusters.size() > 1)

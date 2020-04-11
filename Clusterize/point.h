@@ -10,6 +10,7 @@ class Point {
 	std::vector<double> coords;
 	int n;
 public:
+	Point();
 	Point(const std::vector<double>&);
 
 	double operator [](int) const;

@@ -1,6 +1,10 @@
 ﻿#include "point.h"
 
 
+Point::Point()
+{
+}
+
 Point::Point(const std::vector<double>& coords)
 {
 	this->n = coords.size();

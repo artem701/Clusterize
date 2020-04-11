@@ -21,7 +21,7 @@ public:
 };
 
 template<class T>
-inline Branch<T>::Branch(Cluster<T>* a, Cluster<T>* b)
+inline Branch<T>::Branch(Cluster<T>* a, Cluster<T>* b) : average(T())
 {
 	// Назначаем ветвям кластеры a и b
 	t1 = a;
@@ -57,8 +57,8 @@ template<class T>
 inline void Branch<T>::save(std::ofstream & of) const
 {
 	of << "{";
-	t1->save;
-	t2->save;
+	t1->save(of);
+	t2->save(of);
 	of << "}";
 }
 
