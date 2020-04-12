@@ -6,11 +6,16 @@
 #include <fstream>
 #include <vector>
 #include <list>
+#include <time.h>
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
+	time_t   start, finish;
+	double elapsed_time;
+	time(&start);
+
 	ifstream ifs;
 
 	if (argc > 1)
@@ -37,7 +42,17 @@ int main(int argc, char* argv[])
 	c->save((argc>2)?argv[2]:"out.txt");
 	delete c;
 
-	while (1);
+	time(&finish);
+
+	elapsed_time = difftime(finish, start);
+
+	ofstream log = ofstream((argc>3)?argv[3]:"log.txt");
+	log << "Elements count: " << l.size() << "\n"
+		 << "One element size: " << sizeof(l.front()) << "\n" 
+		 << "Calculating time: " << elapsed_time << "s\n";
+
+	log.close();
+	system("pause");
 
 	return 0;
 }

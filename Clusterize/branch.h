@@ -28,12 +28,9 @@ inline Branch<T>::Branch(Cluster<T>* a, Cluster<T>* b) : average(T())
 	t2 = b;
 
 	// Заранее вычисляем среднее значение кластера
-	std::list<T> l, l2;
-	l = t1->tolist();
-	l2 = t2->tolist();
-	l.insert(l.begin(), l2.begin(), l2.end());
+	this->weight = t1->weight + t2->weight;
 
-	average = T::Average(l);
+	average = T::Average(t1->mid(), t1->weight, t2->mid(), t2->weight);
 }
 
 template<class T>

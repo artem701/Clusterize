@@ -16,7 +16,7 @@
 	double static T::Distance(const T&, const T&)
 		Условное расстояние между двумя объектами
 
-	T static T::Average(const list<T>)
+	T static T::Average(const T& a, int weight_a, const T& b, int weight_b)
 		Усредненный объект
 
 	void T::flush(ofstream&)
@@ -27,10 +27,17 @@ template <class T>
 class Cluster
 {
 public:
+
+	// Кол-во элементов в кластере
+	int weight;
+
 	// Основной алгоритм кластеризации
 	static Cluster<T>* clusterize(std::list<T>);
 
 	int save(const char*) const;
+
+	// Возвращает центр кластера
+	virtual T mid() const = 0;
 
 	// Возвращает список всех объектов кластера
 	virtual std::list<T> tolist() const = 0;
@@ -39,11 +46,6 @@ public:
 	virtual void save(std::ofstream&) const = 0;
 
 	virtual ~Cluster() { }
-
-protected:
-
-	// Возвращает центр кластера
-	virtual T mid() const = 0;
 
 	typedef Segment<Cluster<T>*> Segment;
 
@@ -81,7 +83,7 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 		Branch<T>* new_cluster = new Branch<T>(shortest.first, shortest.second);
 		clusters.remove(shortest.first);
 		clusters.remove(shortest.second);
-		segments.erase(segments.begin());
+		//segments.erase(segments.begin());
 
 		// Удаляем каждый отрезок, включающий хотя бы одну из поглощенных вершин
 		for (auto it = segments.begin(); it != segments.end();)

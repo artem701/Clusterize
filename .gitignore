@@ -16,3 +16,9 @@ Debug/Clusterize.ilk
 *.idb
 *.pdb
 *.pdb
+*.obj
+*.obj
+*.idb
+*.tlog
+*.pdb
+*.ilk

@@ -28,23 +28,19 @@ double Point::Distance(const Point& a, const Point& b)
 	return sqrt(quads);
 }
 
-Point Point::Average(std::list<Point> l)
+Point Point::Average(const Point& a, int weight_a, const Point& b, int weight_b)
 {
-	int n = l.front().n;
-	std::vector<double> midcoords;
-	midcoords.resize(n);
-	int sz = l.size();
-	
-	for (int j = 0; j < n; ++j)
-	{
-		double sum = 0.0;
-		for (auto i = l.begin(); i != l.end(); ++i)
-			sum += i->coords[j];
-		
-		midcoords[j] = sum / (double)(sz);
-	}
+	int n = a.n;
+	if (n != b.n)
+		throw new std::exception("Incompatible points in Point::Average");
 
-	return Point(midcoords);
+	std::vector<double> mid_coords;
+	mid_coords.resize(n);
+
+	for (int i = 0; i < n; ++i)
+		mid_coords[i] = (a.coords[i] + b.coords[i]) / 2.0;
+
+	return Point(mid_coords);
 }
 
 void Point::flush(std::ofstream& ofs) const
