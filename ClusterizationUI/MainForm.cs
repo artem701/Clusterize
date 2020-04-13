@@ -17,8 +17,6 @@ namespace ClusterizationUI
         public MainForm()
         {
             InitializeComponent();
-
-            whole_set = Cluster.Load("out.txt");
         }
     }
 }
