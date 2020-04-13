@@ -5,22 +5,40 @@ VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Clusterize", "Clusterize\Clusterize.vcxproj", "{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClusterizationUI", "ClusterizationUI\ClusterizationUI.csproj", "{C29A8149-686A-4071-9561-4584269138C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Debug|x64.ActiveCfg = Debug|x64
 		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Debug|x64.Build.0 = Debug|x64
 		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Debug|x86.ActiveCfg = Debug|Win32
 		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Debug|x86.Build.0 = Debug|Win32
+		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Release|Any CPU.ActiveCfg = Release|Win32
 		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Release|x64.ActiveCfg = Release|x64
 		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Release|x64.Build.0 = Release|x64
 		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Release|x86.ActiveCfg = Release|Win32
 		{5BEDDA6F-564E-4BF5-9CF3-B84AADBB6DCF}.Release|x86.Build.0 = Release|Win32
+		{C29A8149-686A-4071-9561-4584269138C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Debug|x64.Build.0 = Debug|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Debug|x86.Build.0 = Debug|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Release|x64.ActiveCfg = Release|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Release|x64.Build.0 = Release|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Release|x86.ActiveCfg = Release|Any CPU
+		{C29A8149-686A-4071-9561-4584269138C0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
