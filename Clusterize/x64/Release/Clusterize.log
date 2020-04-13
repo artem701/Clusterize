@@ -1,0 +1,7 @@
+﻿  main.cpp
+  point.cpp
+c:\users\артем\source\repos\clusterize\clusterize\point.cpp(10): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  Создание кода
+  All 613 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  Clusterize.vcxproj -> C:\Users\Артем\source\repos\Clusterize\x64\Release\Clusterize.exe

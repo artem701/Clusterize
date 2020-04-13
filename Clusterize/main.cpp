@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 
 	ofstream log = ofstream((argc>3)?argv[3]:"log.txt");
 	log << "Elements count: " << l.size() << "\n"
-		 << "One element size: " << sizeof(l.front()) << "\n" 
+		 << "One element size: " << sizeof(l.front()) << "\n"
 		 << "Calculating time: " << elapsed_time << "s\n";
 
 	log.close();
