@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace ClusterizationUI
 {
@@ -29,7 +30,7 @@ namespace ClusterizationUI
             string coordstr = "";
             while (sr.Peek() != ')')
                 coordstr += (char)sr.Read();
-            coords = coordstr.Split(new string[]{", "}, StringSplitOptions.RemoveEmptyEntries).Select(coord => double.Parse(coord)).ToArray();
+            coords = coordstr.Split(',').Select(coord => double.Parse(coord, CultureInfo.InvariantCulture)).ToArray();
         }
 
         public static Point Read(System.IO.StreamReader sr)

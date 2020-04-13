@@ -12,9 +12,13 @@ namespace ClusterizationUI
 {
     public partial class MainForm : Form
     {
+        Cluster whole_set;
+
         public MainForm()
         {
             InitializeComponent();
+
+            whole_set = Cluster.Load("out.txt");
         }
     }
 }
