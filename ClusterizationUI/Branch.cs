@@ -8,7 +8,7 @@ namespace ClusterizationUI
 {
     class Branch : Cluster
     {
-        private Cluster left, right;
+        public Cluster left, right;
 
         public Branch(Cluster a, Cluster b)
         {
@@ -20,5 +20,7 @@ namespace ClusterizationUI
         {
             return left.toList().Concat(right.toList()).ToList();
         }
+
+        public override int dimensions() => left.dimensions();
     }
 }

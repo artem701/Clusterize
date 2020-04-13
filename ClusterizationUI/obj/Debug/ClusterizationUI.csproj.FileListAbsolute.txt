@@ -7,3 +7,4 @@ C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\obj\Debug\Clusteriz
 C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\obj\Debug\ClusterizationUI.csproj.CoreCompileInputs.cache
 C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\obj\Debug\ClusterizationUI.exe
 C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\obj\Debug\ClusterizationUI.pdb
+C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\obj\Debug\ClusterizationUI.MainForm.resources

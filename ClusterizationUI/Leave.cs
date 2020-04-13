@@ -19,5 +19,7 @@ namespace ClusterizationUI
         {
             return new List<Point>() { value };
         }
+
+        public override int dimensions() => value.n;
     }
 }
