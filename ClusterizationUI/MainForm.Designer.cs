@@ -37,9 +37,15 @@
             this.xAxisBox = new System.Windows.Forms.ComboBox();
             this.yAxisBox = new System.Windows.Forms.ComboBox();
             this.startButton = new System.Windows.Forms.Button();
-            this.pathBox = new System.Windows.Forms.TextBox();
             this.resetScaleButton = new System.Windows.Forms.Button();
+            this.pointBox = new System.Windows.Forms.TextBox();
+            this.readyPointsBox = new System.Windows.Forms.Label();
+            this.addButton = new System.Windows.Forms.Button();
+            this.removeButton = new System.Windows.Forms.Button();
+            this.writeButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.tabController.SuspendLayout();
+            this.generatorPage.SuspendLayout();
             this.vizualizerPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +65,11 @@
             // generatorPage
             // 
             this.generatorPage.BackColor = System.Drawing.SystemColors.Control;
+            this.generatorPage.Controls.Add(this.writeButton);
+            this.generatorPage.Controls.Add(this.removeButton);
+            this.generatorPage.Controls.Add(this.addButton);
+            this.generatorPage.Controls.Add(this.readyPointsBox);
+            this.generatorPage.Controls.Add(this.pointBox);
             this.generatorPage.Location = new System.Drawing.Point(4, 25);
             this.generatorPage.Name = "generatorPage";
             this.generatorPage.Padding = new System.Windows.Forms.Padding(3);
@@ -69,8 +80,8 @@
             // vizualizerPage
             // 
             this.vizualizerPage.BackColor = System.Drawing.SystemColors.Control;
+            this.vizualizerPage.Controls.Add(this.label4);
             this.vizualizerPage.Controls.Add(this.resetScaleButton);
-            this.vizualizerPage.Controls.Add(this.pathBox);
             this.vizualizerPage.Controls.Add(this.startButton);
             this.vizualizerPage.Controls.Add(this.yAxisBox);
             this.vizualizerPage.Controls.Add(this.xAxisBox);
@@ -114,6 +125,7 @@
             // 
             // xAxisBox
             // 
+            this.xAxisBox.Enabled = false;
             this.xAxisBox.FormattingEnabled = true;
             this.xAxisBox.Location = new System.Drawing.Point(149, 6);
             this.xAxisBox.Name = "xAxisBox";
@@ -122,6 +134,7 @@
             // 
             // yAxisBox
             // 
+            this.yAxisBox.Enabled = false;
             this.yAxisBox.FormattingEnabled = true;
             this.yAxisBox.Location = new System.Drawing.Point(149, 60);
             this.yAxisBox.Name = "yAxisBox";
@@ -134,25 +147,69 @@
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(189, 28);
             this.startButton.TabIndex = 5;
-            this.startButton.Text = "Открыть";
+            this.startButton.Text = "Открыть...";
             this.startButton.UseVisualStyleBackColor = true;
-            // 
-            // pathBox
-            // 
-            this.pathBox.Location = new System.Drawing.Point(9, 502);
-            this.pathBox.Name = "pathBox";
-            this.pathBox.Size = new System.Drawing.Size(186, 23);
-            this.pathBox.TabIndex = 6;
-            this.pathBox.Text = "out.txt";
             // 
             // resetScaleButton
             // 
+            this.resetScaleButton.Enabled = false;
             this.resetScaleButton.Location = new System.Drawing.Point(9, 107);
             this.resetScaleButton.Name = "resetScaleButton";
             this.resetScaleButton.Size = new System.Drawing.Size(186, 31);
             this.resetScaleButton.TabIndex = 7;
             this.resetScaleButton.Text = "Сбросить масштаб";
             this.resetScaleButton.UseVisualStyleBackColor = true;
+            // 
+            // pointBox
+            // 
+            this.pointBox.Location = new System.Drawing.Point(3, 6);
+            this.pointBox.Multiline = true;
+            this.pointBox.Name = "pointBox";
+            this.pointBox.Size = new System.Drawing.Size(312, 27);
+            this.pointBox.TabIndex = 0;
+            // 
+            // readyPointsBox
+            // 
+            this.readyPointsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.readyPointsBox.Location = new System.Drawing.Point(3, 36);
+            this.readyPointsBox.Name = "readyPointsBox";
+            this.readyPointsBox.Size = new System.Drawing.Size(312, 519);
+            this.readyPointsBox.TabIndex = 1;
+            // 
+            // addButton
+            // 
+            this.addButton.Location = new System.Drawing.Point(321, 6);
+            this.addButton.Name = "addButton";
+            this.addButton.Size = new System.Drawing.Size(95, 27);
+            this.addButton.TabIndex = 2;
+            this.addButton.Text = "Добавить";
+            this.addButton.UseVisualStyleBackColor = true;
+            // 
+            // removeButton
+            // 
+            this.removeButton.Location = new System.Drawing.Point(422, 7);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.Size = new System.Drawing.Size(94, 26);
+            this.removeButton.TabIndex = 3;
+            this.removeButton.Text = "Удалить";
+            this.removeButton.UseVisualStyleBackColor = true;
+            // 
+            // writeButton
+            // 
+            this.writeButton.Location = new System.Drawing.Point(321, 519);
+            this.writeButton.Name = "writeButton";
+            this.writeButton.Size = new System.Drawing.Size(195, 36);
+            this.writeButton.TabIndex = 4;
+            this.writeButton.Text = "Записать в файл...";
+            this.writeButton.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 483);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 17);
+            this.label4.TabIndex = 8;
             // 
             // MainForm
             // 
@@ -164,6 +221,8 @@
             this.Name = "MainForm";
             this.Text = "Form2";
             this.tabController.ResumeLayout(false);
+            this.generatorPage.ResumeLayout(false);
+            this.generatorPage.PerformLayout();
             this.vizualizerPage.ResumeLayout(false);
             this.vizualizerPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).EndInit();
@@ -182,7 +241,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox yAxisBox;
         private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.TextBox pathBox;
         private System.Windows.Forms.Button resetScaleButton;
+        private System.Windows.Forms.Label readyPointsBox;
+        private System.Windows.Forms.TextBox pointBox;
+        private System.Windows.Forms.Button removeButton;
+        private System.Windows.Forms.Button addButton;
+        private System.Windows.Forms.Button writeButton;
+        private System.Windows.Forms.Label label4;
     }
 }
