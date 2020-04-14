@@ -38,7 +38,7 @@ Point Point::Average(const Point& a, int weight_a, const Point& b, int weight_b)
 	mid_coords.resize(n);
 
 	for (int i = 0; i < n; ++i)
-		mid_coords[i] = (a.coords[i] + b.coords[i]) / 2.0;
+		mid_coords[i] = (a.coords[i]*weight_a + b.coords[i]*weight_b) / (weight_a + weight_b);
 
 	return Point(mid_coords);
 }
@@ -55,18 +55,3 @@ int Point::dimensions() const
 {
 	return n;
 }
-/*
-bool Point::operator<(const Point & a) const
-{
-	if (n != a.n)
-		throw std::exception("Incompatible comparison in Point::operator<");
-
-	for (int i = 0; i < n; ++i)
-	{
-		if (coords[i] < a.coords[i])
-			return true;
-		if (coords[i] > a.coords[i])
-			return false;
-	}
-	return false;
-}*/
