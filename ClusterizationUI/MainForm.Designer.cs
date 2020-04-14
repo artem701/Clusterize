@@ -170,6 +170,7 @@
             this.mapBox.Size = new System.Drawing.Size(550, 550);
             this.mapBox.TabIndex = 1;
             this.mapBox.TabStop = false;
+            this.mapBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mapBox_MouseClick);
             // 
             // tabController
             // 

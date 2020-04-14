@@ -35,7 +35,7 @@ namespace ClusterizationUI
         List<Camera> view_history;
 
         // Радиус отображаемых точек
-        const int thickness = 2;
+        float thickness = 2;
 
         // Задает возможность отрисовки
         bool allow_draw;
@@ -78,7 +78,6 @@ namespace ClusterizationUI
             {
                 snapshot(vizualizingClusters[i].toList(), view_history[0], ref gr, cluster_colors[i]);
             }
-            //mapBox.Refresh();
         }
 
         // Событие по нажатию кнопки "Открыть..."
@@ -230,6 +229,42 @@ namespace ClusterizationUI
         private void resetScaleButton_Click(object sender, EventArgs e)
         {
             resetCamera();
+            drawMap();
+        }
+
+        private void mapBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (!allow_draw)
+                return;
+
+            const double k = 2, softener = 0.9;
+
+            // Отдаление
+            if (e.Button == MouseButtons.Right)
+            {
+                thickness /= (int)(k*softener);
+
+                if (view_history.Count > 1)
+                {
+                    view_history.RemoveAt(0);
+                    if (view_history.Count == 1)
+                        resetScaleButton.Enabled = false;
+                }
+            }
+            // Приближение
+            else if (e.Button == MouseButtons.Left)
+            {
+                resetScaleButton.Enabled = true;
+
+                thickness *= (int)(k*softener);
+
+                Camera old = view_history[0];
+                Camera cam = new Camera(old.size / k, 
+                    e.X*old.size/map_border + old.left   - old.size / (2*k), 
+                    (map_border - e.Y)*old.size/map_border + old.bottom - old.size / (2*k));
+                view_history.Insert(0, cam);
+            }
+
             drawMap();
         }
 

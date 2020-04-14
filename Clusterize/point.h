@@ -16,7 +16,7 @@ public:
 	double operator [](int) const;
 
 	static double Distance(const Point&, const Point&);
-	static Point Average(const Point& a, int weight_a, const Point& b, int weight_b);
+	static Point Average(const Point& a, double weight_a, const Point& b, double weight_b);
 	void flush(std::ofstream&) const;
 
 	int dimensions() const;

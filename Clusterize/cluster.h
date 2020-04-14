@@ -30,7 +30,7 @@ class Cluster
 public:
 
 	// Кол-во элементов в кластере
-	int weight;
+	double weight;
 
 	// Основной алгоритм кластеризации
 	static Cluster<T>* clusterize(std::list<T>);

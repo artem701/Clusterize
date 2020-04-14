@@ -28,7 +28,7 @@ double Point::Distance(const Point& a, const Point& b)
 	return sqrt(quads);
 }
 
-Point Point::Average(const Point& a, int weight_a, const Point& b, int weight_b)
+Point Point::Average(const Point& a, double weight_a, const Point& b, double weight_b)
 {
 	int n = a.n;
 	if (n != b.n)
