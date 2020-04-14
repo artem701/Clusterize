@@ -1,0 +1,3 @@
+Elements count: 1112
+One element size: 16
+Calculating time: 23s

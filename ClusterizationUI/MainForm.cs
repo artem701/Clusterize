@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; 
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,17 +31,54 @@ namespace ClusterizationUI
         // Значения каких координат проецируются на оси x и y
         int x_axis, y_axis;
 
+        // Стек с состояниями камеры
+        List<Camera> view_history;
+
+        // Радиус отображаемых точек
+        const int thickness = 2;
+
+        // Задает возможность отрисовки
+        bool allow_draw;
+
         public MainForm()
         {
             InitializeComponent();
 
             map_border = mapBox.Width;
+            allow_draw = false;
+        }
+
+        private void snapshot(List<Point> points, Camera cam, ref Graphics g, Color color)
+        {
+            foreach(Point p in points)
+            {
+                double x = p[x_axis], y = p[y_axis];
+                // Проеряем, попадает ли точка в рассматриваемую область
+                if ((x < cam.left)   || (x > (cam.left + cam.size)) ||
+                    (y < cam.bottom) || (y > (cam.bottom + cam.size)))
+                    continue;
+
+                int rx, ry;
+                rx = (int)(map_border * (x - cam.left) / cam.size);
+                ry = map_border - (int)(map_border * (y - cam.bottom) / cam.size);
+                g.FillEllipse(new SolidBrush(color), rx - thickness, ry - thickness, 2 * thickness, 2 * thickness);
+            }
         }
 
         private void drawMap()
         {
+            if (!allow_draw)
+                return;
 
-            // САМОЕ ГЛАВНОЕ!
+            Bitmap bmp = new Bitmap(map_border, map_border);
+            mapBox.Image = (Image)bmp;
+            Graphics gr = Graphics.FromImage(mapBox.Image);
+            gr.FillRectangle(new SolidBrush(Color.LightYellow), 0, 0, map_border, map_border);
+            for (int i = 0; i < vizualizingClusters.Count; ++i)
+            {
+                snapshot(vizualizingClusters[i].toList(), view_history[0], ref gr, cluster_colors[i]);
+            }
+            //mapBox.Refresh();
         }
 
         // Событие по нажатию кнопки "Открыть..."
@@ -63,18 +100,23 @@ namespace ClusterizationUI
                 filename = fd.FileName;
             else
             {
-                Process proc = new Process();
-                proc.StartInfo.FileName = "Clusterize.exe";
-                proc.StartInfo.Arguments = fd.FileName + " " + fd.FileName + ".out.txt";
-                proc.Start();
-                proc.WaitForExit();
+                if (System.IO.File.Exists(fd.FileName + ".out.txt"))
+                    filename = fd.FileName + ".out.txt";
+                else
+                {
+                    Process proc = new Process();
+                    proc.StartInfo.FileName = "Clusterize.exe";
+                    proc.StartInfo.Arguments = "\"" + fd.FileName + "\" \"" + fd.FileName + ".out.txt\"";
+                    proc.Start();
+                    proc.WaitForExit();
 
-                filename = fd.FileName + ".out.txt";
+                    filename = fd.FileName + ".out.txt";
+                }
             }
 
             try
             {
-                head_cluster = Cluster.Load(fd.FileName);
+                head_cluster = Cluster.Load(filename);
             }catch(Exception ex)
             {
                 MessageBox.Show("Ошибка чтения из файла: " + ex.Message);
@@ -113,13 +155,18 @@ namespace ClusterizationUI
                 xAxisBox.Enabled = true;
                 yAxisBox.Enabled = true;
             }
+            
+            resetCamera();
+
+            allow_draw = true;
+            drawMap();
         }
 
         // Находит наикрупнейший кластер из рассматриваемых
         // и разделяет его на два. Повторяет процесс при необходимости
         private void divideClusters(int times = 1)
         {
-            if (times < 0)
+            if (times < 1)
                 return;
 
             // Поиск крупнейшего
@@ -149,12 +196,16 @@ namespace ClusterizationUI
 
         private void xAxisBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            x_axis = int.Parse(xAxisBox.Text);
+            x_axis = int.Parse(xAxisBox.Text) - 1;
+            resetCamera();
+            drawMap();
         }
 
         private void yAxisBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            y_axis = int.Parse(yAxisBox.Text);
+            y_axis = int.Parse(yAxisBox.Text) - 1;
+            resetCamera();
+            drawMap();
         }
 
         // Изменено кол-во отображаемых кластеров
@@ -172,6 +223,57 @@ namespace ClusterizationUI
                 vizualizingClusters = new List<Cluster>() { head_cluster };
                 divideClusters(new_num - 1);
             }
+
+            drawMap();
+        }
+
+        private void resetScaleButton_Click(object sender, EventArgs e)
+        {
+            resetCamera();
+            drawMap();
+        }
+
+        private void resetCamera(bool recalculate = true)
+        {
+            resetScaleButton.Enabled = false;
+
+            // Если пересчет не требуется
+            if (!recalculate)
+            {
+                while (view_history.Count != 1)
+                    view_history.RemoveAt(0);
+                return;
+            }
+
+            // Иначе исходное положение рассчитывается с нуля
+            // Найдём разброс точек по проекции на XOY
+            List<Point> all_points = head_cluster.toList();
+            Point p = all_points[0];
+            double min_x = p[x_axis], max_x = p[x_axis],
+                   min_y = p[y_axis], max_y = p[y_axis];
+
+            foreach (Point point in all_points)
+            {
+                double x = point[x_axis], y = point[y_axis];
+                if (x < min_x)
+                    min_x = x;
+                else if (x > max_x)
+                    max_x = x;
+
+                if (y < min_y)
+                    min_y = y;
+                else if (y > max_y)
+                    max_y = y;
+            }
+
+            // Разброс
+            double dif_x = max_x - min_x, dif_y = max_y - min_y;
+            double dif = Math.Max(dif_x, dif_y);
+            // Чуть увеличим масштаб, чтобы все точки было хорошо видно
+            dif += dif * 0.1;
+
+            view_history = new List<Camera>();
+            view_history.Add(new Camera(dif, min_x - (dif - dif_x)/2, min_y - (dif - dif_y) / 2));
         }
     }
 }

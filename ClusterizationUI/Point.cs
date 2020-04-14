@@ -21,12 +21,10 @@ namespace ClusterizationUI
         public double this[int index]
         {
             get => coords[index];
-            //private set => coords[index] = value;
         }
 
-        private void fromstream(System.IO.StreamReader sr/*, int dimensions*/)
+        private void fromstream(System.IO.StreamReader sr)
         {
-            //coords = new double[dimensions];
             string coordstr = "";
             while (sr.Peek() != ')')
                 coordstr += (char)sr.Read();

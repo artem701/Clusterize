@@ -7,11 +7,12 @@
 #include <set>
 #include <iterator>
 #include <fstream>
+#include <iostream>
 
 /*
 	Требования к T
 
-	Наличие кончтруктора по умолчанию
+	Наличие конструктора по умолчанию
 
 	double static T::Distance(const T&, const T&)
 		Условное расстояние между двумя объектами
@@ -72,6 +73,10 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 		for (auto j = next; j != clusters.end(); ++j)
 			segments.insert(Segment(*i, *j, T::Distance((*i)->mid(), (*j)->mid())));
 
+	int start_size = clusters.size();
+	int prev_percent = 0;
+	std::cout << "0%\n";
+
 	// Основная фаза алгоритма
 	while (clusters.size() > 1)
 	{
@@ -103,6 +108,14 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 
 		// Наконец, добавление сформированного кластера в список
 		clusters.push_back(new_cluster);
+		
+		// Оповещаем пользователя о прогрессе алгоритма
+		int perc = (100 * (start_size - clusters.size())) / start_size;
+		if (perc != prev_percent)
+		{
+			prev_percent = perc;
+			std::cout << perc << "%\n";
+		}
 	}
 
 	// Возвращаем последний оставшийся кластер в списке

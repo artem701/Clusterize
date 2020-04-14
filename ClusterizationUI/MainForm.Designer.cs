@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.vizualizerPage = new System.Windows.Forms.TabPage();
-            this.mapBox = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.xAxisBox = new System.Windows.Forms.ComboBox();
-            this.yAxisBox = new System.Windows.Forms.ComboBox();
-            this.startButton = new System.Windows.Forms.Button();
-            this.resetScaleButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.clustersNumBox = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.resetScaleButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
+            this.yAxisBox = new System.Windows.Forms.ComboBox();
+            this.xAxisBox = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.mapBox = new System.Windows.Forms.PictureBox();
             this.tabController = new System.Windows.Forms.TabControl();
             this.generatorPage = new System.Windows.Forms.TabPage();
             this.writeButton = new System.Windows.Forms.Button();
@@ -72,53 +72,45 @@
             this.vizualizerPage.TabIndex = 1;
             this.vizualizerPage.Text = "Кластеризовать точки из файла";
             // 
-            // mapBox
+            // clustersNumBox
             // 
-            this.mapBox.BackColor = System.Drawing.Color.LightYellow;
-            this.mapBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mapBox.Location = new System.Drawing.Point(201, 6);
-            this.mapBox.Name = "mapBox";
-            this.mapBox.Size = new System.Drawing.Size(550, 550);
-            this.mapBox.TabIndex = 1;
-            this.mapBox.TabStop = false;
+            this.clustersNumBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.clustersNumBox.Enabled = false;
+            this.clustersNumBox.FormattingEnabled = true;
+            this.clustersNumBox.Location = new System.Drawing.Point(6, 127);
+            this.clustersNumBox.Name = "clustersNumBox";
+            this.clustersNumBox.Size = new System.Drawing.Size(46, 24);
+            this.clustersNumBox.TabIndex = 9;
+            this.clustersNumBox.SelectedIndexChanged += new System.EventHandler(this.clustersNumBox_SelectedIndexChanged);
             // 
-            // label1
+            // label4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 17);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Проецировать на Х:";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 483);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 17);
+            this.label4.TabIndex = 8;
             // 
-            // label2
+            // resetScaleButton
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 17);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Проецировать на Y:";
+            this.resetScaleButton.Enabled = false;
+            this.resetScaleButton.Location = new System.Drawing.Point(6, 186);
+            this.resetScaleButton.Name = "resetScaleButton";
+            this.resetScaleButton.Size = new System.Drawing.Size(186, 31);
+            this.resetScaleButton.TabIndex = 7;
+            this.resetScaleButton.Text = "Сбросить масштаб";
+            this.resetScaleButton.UseVisualStyleBackColor = true;
+            this.resetScaleButton.Click += new System.EventHandler(this.resetScaleButton_Click);
             // 
-            // label3
+            // startButton
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 107);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(181, 17);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Отображаемые кластеры:";
-            // 
-            // xAxisBox
-            // 
-            this.xAxisBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.xAxisBox.Enabled = false;
-            this.xAxisBox.FormattingEnabled = true;
-            this.xAxisBox.Location = new System.Drawing.Point(149, 6);
-            this.xAxisBox.Name = "xAxisBox";
-            this.xAxisBox.Size = new System.Drawing.Size(46, 24);
-            this.xAxisBox.TabIndex = 3;
-            this.xAxisBox.SelectedIndexChanged += new System.EventHandler(this.xAxisBox_SelectedIndexChanged);
+            this.startButton.Location = new System.Drawing.Point(6, 528);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(189, 28);
+            this.startButton.TabIndex = 5;
+            this.startButton.Text = "Открыть...";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // yAxisBox
             // 
@@ -131,44 +123,53 @@
             this.yAxisBox.TabIndex = 4;
             this.yAxisBox.SelectedIndexChanged += new System.EventHandler(this.yAxisBox_SelectedIndexChanged);
             // 
-            // startButton
+            // xAxisBox
             // 
-            this.startButton.Location = new System.Drawing.Point(6, 528);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(189, 28);
-            this.startButton.TabIndex = 5;
-            this.startButton.Text = "Открыть...";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            this.xAxisBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.xAxisBox.Enabled = false;
+            this.xAxisBox.FormattingEnabled = true;
+            this.xAxisBox.Location = new System.Drawing.Point(149, 6);
+            this.xAxisBox.Name = "xAxisBox";
+            this.xAxisBox.Size = new System.Drawing.Size(46, 24);
+            this.xAxisBox.TabIndex = 3;
+            this.xAxisBox.SelectedIndexChanged += new System.EventHandler(this.xAxisBox_SelectedIndexChanged);
             // 
-            // resetScaleButton
+            // label3
             // 
-            this.resetScaleButton.Enabled = false;
-            this.resetScaleButton.Location = new System.Drawing.Point(6, 186);
-            this.resetScaleButton.Name = "resetScaleButton";
-            this.resetScaleButton.Size = new System.Drawing.Size(186, 31);
-            this.resetScaleButton.TabIndex = 7;
-            this.resetScaleButton.Text = "Сбросить масштаб";
-            this.resetScaleButton.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 107);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(181, 17);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Отображаемые кластеры:";
             // 
-            // label4
+            // label2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 483);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 17);
-            this.label4.TabIndex = 8;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 17);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Проецировать на Y:";
             // 
-            // clustersNumBox
+            // label1
             // 
-            this.clustersNumBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.clustersNumBox.Enabled = false;
-            this.clustersNumBox.FormattingEnabled = true;
-            this.clustersNumBox.Location = new System.Drawing.Point(6, 127);
-            this.clustersNumBox.Name = "clustersNumBox";
-            this.clustersNumBox.Size = new System.Drawing.Size(46, 24);
-            this.clustersNumBox.TabIndex = 9;
-            this.clustersNumBox.SelectedIndexChanged += new System.EventHandler(this.clustersNumBox_SelectedIndexChanged);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(140, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Проецировать на Х:";
+            // 
+            // mapBox
+            // 
+            this.mapBox.BackColor = System.Drawing.Color.LightYellow;
+            this.mapBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mapBox.Location = new System.Drawing.Point(201, 6);
+            this.mapBox.Name = "mapBox";
+            this.mapBox.Size = new System.Drawing.Size(550, 550);
+            this.mapBox.TabIndex = 1;
+            this.mapBox.TabStop = false;
             // 
             // tabController
             // 
@@ -248,7 +249,7 @@
             this.Controls.Add(this.tabController);
             this.MaximizeBox = false;
             this.Name = "MainForm";
-            this.Text = "Form2";
+            this.Text = "Кластеризация точек в n-мерном Евклидовом пространстве";
             this.vizualizerPage.ResumeLayout(false);
             this.vizualizerPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).EndInit();

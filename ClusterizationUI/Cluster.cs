@@ -19,7 +19,9 @@ namespace ClusterizationUI
         public static Cluster Load(string filename)
         {
             System.IO.StreamReader sr = new System.IO.StreamReader(filename);
-            return Load(sr);
+            Cluster cluster = Load(sr);
+            sr.Close();
+            return cluster;
         }
 
         public static Cluster Load(System.IO.StreamReader sr)
