@@ -32,27 +32,44 @@ int main(int argc, char* argv[])
 	cout << "Чтение точек из файла...\n";
 	while (!ifs.eof())
 	{
+		bool success = true;
 		vector<double> v;
-		for (int i = 0; i < n; ++i)
+		for (int i = 0;  success && i < n; ++i)
 		{
 			double x;
-			ifs >> x;
+			success = (bool)(ifs >> x);
 			v.push_back(x);
 		}
-		l.push_back(Point(v));
+		double w;
+		if (success && (ifs >> w))
+		{
+			l.push_back(Point(v, w));
+		}
 	}
 	ifs.close();
-	cout << "Кластеризация...\n";
+	cout << "Начата кластеризация...\n";
 	Cluster<Point>* c = Cluster<Point>::clusterize(l);
 	cout << "Сохранение результатов...\n";
-	c->save((argc>2)?argv[2]:"out.txt");
-	delete c;
+	if (c != nullptr) 
+	{
+		c->save((argc > 2) ? argv[2] : "out.txt");
+		delete c;
+	}
+	else
+	{
+		cerr << "Пустой входной файл!\n";
+		// Создание пустого выходного файла
+		ofstream ofs;
+		ofs.open((argc > 2) ? argv[2] : "out.txt");
+		ofs.close();
+	}
+
 
 	time(&finish);
 
 	elapsed_time = difftime(finish, start);
 
-	ofstream log = ofstream(/*(argc>3)?argv[3]:*/"log.txt");
+	ofstream log = ofstream("log.txt");
 	log << "Elements count: " << l.size() << "\n"
 		 << "One element size: " << sizeof(l.front()) << "\n"
 		 << "Calculating time: " << elapsed_time << "s\n";

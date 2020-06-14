@@ -8,3 +8,12 @@ C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\bin\Release\Cluster
 C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.MainForm.resources
 C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.exe
 C:\Users\Артем\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.pdb
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\bin\Release\ClusterizationUI.exe.config
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\bin\Release\ClusterizationUI.exe
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\bin\Release\ClusterizationUI.pdb
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.MainForm.resources
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.Properties.Resources.resources
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.csproj.GenerateResource.cache
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.csproj.CoreCompileInputs.cache
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.exe
+C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.pdb

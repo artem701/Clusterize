@@ -5,10 +5,11 @@ Point::Point()
 {
 }
 
-Point::Point(const std::vector<double>& coords)
+Point::Point(const std::vector<double>& coords, double w)
 {
 	this->n = coords.size();
 	this->coords = coords;
+	this->weight = w;
 }
 
 double Point::operator[](int i) const
@@ -28,24 +29,23 @@ double Point::Distance(const Point& a, const Point& b)
 	return sqrt(quads);
 }
 
-Point Point::Average(const Point& a, double weight_a, const Point& b, double weight_b)
+Point Point::Average(const Point& a, const Point& b)
 {
 	int n = a.n;
 	if (n != b.n)
-		throw new std::exception("Incompatible points in Point::Average");
+		throw std::exception("Incompatible points in Point::Average");
 
 	std::vector<double> mid_coords;
 	mid_coords.resize(n);
 
 	for (int i = 0; i < n; ++i)
-		mid_coords[i] = (a.coords[i]*weight_a + b.coords[i]*weight_b) / (weight_a + weight_b);
+		mid_coords[i] = (a.coords[i]*a.weight + b.coords[i]*b.weight) / (a.weight + b.weight);
 
-	return Point(mid_coords);
+	return Point(mid_coords, a.weight + b.weight);
 }
 
 void Point::flush(std::ofstream& ofs) const
 {
-	// переделать
 	for (int i = 0; i < n-1; ++i)
 		ofs << coords[i] << ", ";
 	ofs << coords[n - 1];

@@ -24,7 +24,6 @@ public:
 template<class T>
 inline Leave<T>::Leave(const T & _val) : val(_val)
 {
-	this->weight = 1;
 }
 
 template<class T>

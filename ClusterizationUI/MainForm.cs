@@ -21,9 +21,11 @@ namespace ClusterizationUI
         // которые в данный момент отображаются на форме
         List<Cluster> vizualizingClusters;
         
+        /*
         // Цвета назначаемые отображаемым кластерам
         Color[] cluster_colors = { Color.Red, Color.Green, Color.Yellow, Color.Blue,
                                    Color.Violet, Color.Orange, Color.Brown, Color.DarkSeaGreen };
+        */
 
         // Фактическая высота и ширина поля отображения
         int map_border;
@@ -35,7 +37,7 @@ namespace ClusterizationUI
         List<Camera> view_history;
 
         // Радиус отображаемых точек
-        float thickness = 2;
+        float thickness = 3;
 
         // Задает возможность отрисовки
         bool allow_draw;
@@ -65,6 +67,21 @@ namespace ClusterizationUI
             }
         }
 
+        private Color get_color(int i)
+        {
+            ++i;
+
+            const int br = 200;
+
+            int r = (int)(Math.Abs(Math.Sin(83 * i * i)) * 255);
+            int x = br * br - r * r;
+            int g = (int)(Math.Abs(Math.Sin(53 * i)) * 255) % ((255*br - 77*r)/150);
+            int b = (255 * br - 77 * r - 150 * g) / 28 % 255;
+
+            Color color = Color.FromArgb(r, g, b);
+            return color;
+        }
+
         private void drawMap()
         {
             if (!allow_draw)
@@ -73,10 +90,10 @@ namespace ClusterizationUI
             Bitmap bmp = new Bitmap(map_border, map_border);
             mapBox.Image = (Image)bmp;
             Graphics gr = Graphics.FromImage(mapBox.Image);
-            gr.FillRectangle(new SolidBrush(Color.LightYellow), 0, 0, map_border, map_border);
+            gr.FillRectangle(new SolidBrush(Color.Black), 0, 0, map_border, map_border);
             for (int i = 0; i < vizualizingClusters.Count; ++i)
             {
-                snapshot(vizualizingClusters[i].toList(), view_history[0], ref gr, cluster_colors[i]);
+                snapshot(vizualizingClusters[i].toList(), view_history[0], ref gr, get_color(i));
             }
         }
 
@@ -125,30 +142,24 @@ namespace ClusterizationUI
             // На начальном этапе отображаем только один кластер, всю выборку
             vizualizingClusters = new List<Cluster>() { head_cluster };
 
-            // Вычисляем максимальное количество отображаемых кластеров,
-            // добавляем соответствующие числа в ComboBox
-            clustersNumBox.Items.Clear();
-            int i = Math.Min(cluster_colors.Length, head_cluster.Count);
-            for (; i > 0; --i)
-                clustersNumBox.Items.Add(i);
-
             // Заполняем переключатели проекций
             xAxisBox.Items.Clear();
             yAxisBox.Items.Clear();
-            int dim = i = head_cluster.dimensions();
+            int i = head_cluster.dimensions();
+            int dim = i;
             for (; i > 0; --i)
             {
                 xAxisBox.Items.Add(i);
                 yAxisBox.Items.Add(i);
             }
 
+            
             // Расположение по умолчанию
             clustersNumBox.Text = "1";
             xAxisBox.Text = "1";
             yAxisBox.Text = (dim > 1) ? "2" : "1";
 
             // Включаем элементы управления
-            clustersNumBox.Enabled = true;
             if (dim > 1)
             {
                 xAxisBox.Enabled = true;
@@ -168,12 +179,26 @@ namespace ClusterizationUI
             if (times < 1)
                 return;
 
-            // Поиск крупнейшего
-            int max = 0, maxcount = vizualizingClusters[0].Count;
-            int count = maxcount;
-            for (int i = 1; i < vizualizingClusters.Count; ++i)
+            // Поиск крупнейшего кластера из текущих представленных (его нужно разделить на 2)
+            // Пропускаем листья
+            int i = 0;
+            while (i < vizualizingClusters.Count && vizualizingClusters[i] is Leave)
             {
-                count = vizualizingClusters[i].Count;
+                ++i;
+            }
+
+            // Если все текущие кластеры — листья и немогут быть разделены
+            if (i == vizualizingClusters.Count)
+                return;
+
+            int max = i, maxcount = vizualizingClusters[i].Count;
+            
+            for (i = i + 1; i < vizualizingClusters.Count; ++i)
+            {
+                if (vizualizingClusters[i] is Leave)
+                    continue;
+
+                int count = vizualizingClusters[i].Count;
                 if (count > maxcount)
                 {
                     maxcount = count;
@@ -181,14 +206,14 @@ namespace ClusterizationUI
                 }
             }
 
-            // Поскольку мы контролируем введенное количество кластеров на уровне UI,
+            // Поскольку мы совершили все проверки типов,
             // мы уверены, что найденный кластер является веткой
             Branch dividing = (Branch)vizualizingClusters[max];
-            int left = dividing.left.Count, right = count - left;
+            int left = dividing.left.Count, right = maxcount - left;
             // Большую ветвь оставим на месте родителя,
             // меньшую вставим в конец списка
             vizualizingClusters[max] = (left > right) ? dividing.left : dividing.right;
-            vizualizingClusters.Add((right < left) ? dividing.right : dividing.left);
+            vizualizingClusters.Add((left > right) ? dividing.right  : dividing.left);
 
             divideClusters(times - 1);
         }
@@ -242,10 +267,11 @@ namespace ClusterizationUI
             // Отдаление
             if (e.Button == MouseButtons.Right)
             {
-                thickness /= (int)(k*softener);
 
                 if (view_history.Count > 1)
                 {
+                    //thickness = (int)(thickness / (k * softener));
+
                     view_history.RemoveAt(0);
                     if (view_history.Count == 1)
                         resetScaleButton.Enabled = false;
@@ -256,7 +282,7 @@ namespace ClusterizationUI
             {
                 resetScaleButton.Enabled = true;
 
-                thickness *= (int)(k*softener);
+                //thickness = (int)(thickness * (k*softener));
 
                 Camera old = view_history[0];
                 Camera cam = new Camera(old.size / k, 
@@ -266,6 +292,48 @@ namespace ClusterizationUI
             }
 
             drawMap();
+        }
+
+        private int get_clust_num()
+        {
+            int num;
+            if (!int.TryParse(clustersNumBox.Text, out num))
+            {
+                num = 1;
+            }
+            num = Math.Max(num, 1);
+            return num;
+        }
+
+        private void clustersNumBox_TextChanged(object sender, EventArgs e)
+        {
+            int old_num = vizualizingClusters.Count;
+            int new_num = get_clust_num();
+
+            // Доразбиваем имеющиеся кластеры
+            if (new_num > old_num)
+                divideClusters(new_num - old_num);
+            // Или возвращаемся к исходному состоянию и разбиваем кластеры заново
+            else
+            {
+                vizualizingClusters = new List<Cluster>() { head_cluster };
+                divideClusters(new_num - 1);
+            }
+
+            drawMap();
+        }
+
+        private void clustNumInc_Click(object sender, EventArgs e)
+        {
+            clustersNumBox.Text = (get_clust_num() + 1).ToString();
+        }
+
+        private void clustNumDec_Click(object sender, EventArgs e)
+        {
+            int num = get_clust_num();
+            --num;
+            num = Math.Max(num, 1);
+            clustersNumBox.Text = num.ToString();
         }
 
         private void resetCamera(bool recalculate = true)

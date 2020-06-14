@@ -9,7 +9,6 @@ class Branch : public Cluster<T>
 	// Поддеревья
 	Cluster<T> *t1, *t2;
 	T average;
-	//std::list<T> l;
 public:
 	Branch(Cluster<T>* a, Cluster<T>* b);
 
@@ -28,9 +27,7 @@ inline Branch<T>::Branch(Cluster<T>* a, Cluster<T>* b) : average(T())
 	t2 = b;
 
 	// Заранее вычисляем среднее значение кластера
-	this->weight = t1->weight + t2->weight;
-
-	average = T::Average(t1->mid(), t1->weight, t2->mid(), t2->weight);
+	average = T::Average(t1->mid(), t2->mid());
 }
 
 template<class T>

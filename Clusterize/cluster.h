@@ -29,9 +29,6 @@ class Cluster
 {
 public:
 
-	// Кол-во элементов в кластере
-	double weight;
-
 	// Основной алгоритм кластеризации
 	static Cluster<T>* clusterize(std::list<T>);
 
@@ -66,16 +63,22 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 	for (T el : elems_list)
 		clusters.push_back(new Leave<T>(el));
 
+	std::cout << "Начальный расчет расстояний между точками...\n";
+
 	// Начальный расчёт всех расстояний
 	std::multiset<Segment> segments;
-	auto next = clusters.begin();
-	for (auto i = clusters.begin(); (i != clusters.end()) && (next = i, ++next, next != clusters.end()); ++i)
-		for (auto j = next; j != clusters.end(); ++j)
+	for (auto i = clusters.begin(); i != clusters.end(); ++i)
+	{
+		auto j = i;
+		while (++j != clusters.end())
+		{
 			segments.insert(Segment(*i, *j, T::Distance((*i)->mid(), (*j)->mid())));
+		}
+	}
 
-	int start_size = clusters.size();
-	int prev_percent = 0;
-	std::cout << "0%\n";
+	int prev_clust_num = clusters.size();
+	std::cout << "Текущее количество обрабатываемых кластеров:\n";
+	std::cout << prev_clust_num << "\n";
 
 	// Основная фаза алгоритма
 	while (clusters.size() > 1)
@@ -110,11 +113,11 @@ inline Cluster<T>* Cluster<T>::clusterize(std::list<T> elems_list)
 		clusters.push_back(new_cluster);
 		
 		// Оповещаем пользователя о прогрессе алгоритма
-		int perc = (100 * (start_size - clusters.size())) / start_size;
-		if (perc != prev_percent)
+		int clust_num = clusters.size();
+		if (clust_num != prev_clust_num)
 		{
-			prev_percent = perc;
-			std::cout << perc << "%\n";
+			prev_clust_num = clust_num;
+			std::cout << clust_num << "\n";
 		}
 	}
 

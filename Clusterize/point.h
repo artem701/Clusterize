@@ -9,14 +9,15 @@
 class Point {
 	std::vector<double> coords;
 	int n;
+	double weight;
 public:
 	Point();
-	Point(const std::vector<double>&);
+	Point(const std::vector<double>&, double weight = 1.0);
 
 	double operator [](int) const;
 
 	static double Distance(const Point&, const Point&);
-	static Point Average(const Point& a, double weight_a, const Point& b, double weight_b);
+	static Point Average(const Point& a, const Point& b);
 	void flush(std::ofstream&) const;
 
 	int dimensions() const;

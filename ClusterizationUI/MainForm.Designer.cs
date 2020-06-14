@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.vizualizerPage = new System.Windows.Forms.TabPage();
-            this.clustersNumBox = new System.Windows.Forms.ComboBox();
+            this.clustNumDec = new System.Windows.Forms.Button();
+            this.clustNumInc = new System.Windows.Forms.Button();
+            this.clustersNumBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.resetScaleButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
@@ -39,75 +40,67 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.mapBox = new System.Windows.Forms.PictureBox();
-            this.tabController = new System.Windows.Forms.TabControl();
-            this.generatorPage = new System.Windows.Forms.TabPage();
-            this.writeButton = new System.Windows.Forms.Button();
-            this.removeButton = new System.Windows.Forms.Button();
-            this.addButton = new System.Windows.Forms.Button();
-            this.readyPointsBox = new System.Windows.Forms.Label();
-            this.pointBox = new System.Windows.Forms.TextBox();
-            this.vizualizerPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).BeginInit();
-            this.tabController.SuspendLayout();
-            this.generatorPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // vizualizerPage
+            // clustNumDec
             // 
-            this.vizualizerPage.BackColor = System.Drawing.SystemColors.Control;
-            this.vizualizerPage.Controls.Add(this.clustersNumBox);
-            this.vizualizerPage.Controls.Add(this.label4);
-            this.vizualizerPage.Controls.Add(this.resetScaleButton);
-            this.vizualizerPage.Controls.Add(this.startButton);
-            this.vizualizerPage.Controls.Add(this.yAxisBox);
-            this.vizualizerPage.Controls.Add(this.xAxisBox);
-            this.vizualizerPage.Controls.Add(this.label3);
-            this.vizualizerPage.Controls.Add(this.label2);
-            this.vizualizerPage.Controls.Add(this.label1);
-            this.vizualizerPage.Controls.Add(this.mapBox);
-            this.vizualizerPage.Location = new System.Drawing.Point(4, 25);
-            this.vizualizerPage.Name = "vizualizerPage";
-            this.vizualizerPage.Padding = new System.Windows.Forms.Padding(3);
-            this.vizualizerPage.Size = new System.Drawing.Size(759, 564);
-            this.vizualizerPage.TabIndex = 1;
-            this.vizualizerPage.Text = "Кластеризовать точки из файла";
+            this.clustNumDec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clustNumDec.Location = new System.Drawing.Point(51, 142);
+            this.clustNumDec.Name = "clustNumDec";
+            this.clustNumDec.Size = new System.Drawing.Size(46, 24);
+            this.clustNumDec.TabIndex = 23;
+            this.clustNumDec.Text = "<";
+            this.clustNumDec.UseVisualStyleBackColor = true;
+            this.clustNumDec.Click += new System.EventHandler(this.clustNumDec_Click);
+            // 
+            // clustNumInc
+            // 
+            this.clustNumInc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clustNumInc.Location = new System.Drawing.Point(155, 142);
+            this.clustNumInc.Name = "clustNumInc";
+            this.clustNumInc.Size = new System.Drawing.Size(46, 24);
+            this.clustNumInc.TabIndex = 22;
+            this.clustNumInc.Text = ">";
+            this.clustNumInc.UseVisualStyleBackColor = true;
+            this.clustNumInc.Click += new System.EventHandler(this.clustNumInc_Click);
             // 
             // clustersNumBox
             // 
-            this.clustersNumBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.clustersNumBox.Enabled = false;
-            this.clustersNumBox.FormattingEnabled = true;
-            this.clustersNumBox.Location = new System.Drawing.Point(6, 127);
+            this.clustersNumBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clustersNumBox.Location = new System.Drawing.Point(103, 142);
             this.clustersNumBox.Name = "clustersNumBox";
-            this.clustersNumBox.Size = new System.Drawing.Size(46, 24);
-            this.clustersNumBox.TabIndex = 9;
-            this.clustersNumBox.SelectedIndexChanged += new System.EventHandler(this.clustersNumBox_SelectedIndexChanged);
+            this.clustersNumBox.Size = new System.Drawing.Size(46, 22);
+            this.clustersNumBox.TabIndex = 21;
+            this.clustersNumBox.TextChanged += new System.EventHandler(this.clustersNumBox_TextChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 483);
+            this.label4.Location = new System.Drawing.Point(15, 498);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(0, 17);
-            this.label4.TabIndex = 8;
+            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.TabIndex = 20;
             // 
             // resetScaleButton
             // 
             this.resetScaleButton.Enabled = false;
-            this.resetScaleButton.Location = new System.Drawing.Point(6, 186);
+            this.resetScaleButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.resetScaleButton.Location = new System.Drawing.Point(12, 201);
             this.resetScaleButton.Name = "resetScaleButton";
             this.resetScaleButton.Size = new System.Drawing.Size(186, 31);
-            this.resetScaleButton.TabIndex = 7;
+            this.resetScaleButton.TabIndex = 19;
             this.resetScaleButton.Text = "Сбросить масштаб";
             this.resetScaleButton.UseVisualStyleBackColor = true;
             this.resetScaleButton.Click += new System.EventHandler(this.resetScaleButton_Click);
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(6, 528);
+            this.startButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.startButton.Location = new System.Drawing.Point(12, 543);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(189, 28);
-            this.startButton.TabIndex = 5;
+            this.startButton.TabIndex = 18;
             this.startButton.Text = "Открыть...";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
@@ -116,155 +109,98 @@
             // 
             this.yAxisBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.yAxisBox.Enabled = false;
+            this.yAxisBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.yAxisBox.FormattingEnabled = true;
-            this.yAxisBox.Location = new System.Drawing.Point(149, 60);
+            this.yAxisBox.Location = new System.Drawing.Point(155, 75);
             this.yAxisBox.Name = "yAxisBox";
             this.yAxisBox.Size = new System.Drawing.Size(46, 24);
-            this.yAxisBox.TabIndex = 4;
+            this.yAxisBox.TabIndex = 17;
             this.yAxisBox.SelectedIndexChanged += new System.EventHandler(this.yAxisBox_SelectedIndexChanged);
             // 
             // xAxisBox
             // 
             this.xAxisBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.xAxisBox.Enabled = false;
+            this.xAxisBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.xAxisBox.FormattingEnabled = true;
-            this.xAxisBox.Location = new System.Drawing.Point(149, 6);
+            this.xAxisBox.Location = new System.Drawing.Point(155, 21);
             this.xAxisBox.Name = "xAxisBox";
             this.xAxisBox.Size = new System.Drawing.Size(46, 24);
-            this.xAxisBox.TabIndex = 3;
+            this.xAxisBox.TabIndex = 16;
             this.xAxisBox.SelectedIndexChanged += new System.EventHandler(this.xAxisBox_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 107);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(9, 122);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(181, 17);
-            this.label3.TabIndex = 2;
+            this.label3.Size = new System.Drawing.Size(176, 16);
+            this.label3.TabIndex = 13;
             this.label3.Text = "Отображаемые кластеры:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 60);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(9, 75);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(140, 17);
-            this.label2.TabIndex = 2;
+            this.label2.Size = new System.Drawing.Size(138, 16);
+            this.label2.TabIndex = 14;
             this.label2.Text = "Проецировать на Y:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(9, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 17);
-            this.label1.TabIndex = 2;
+            this.label1.Size = new System.Drawing.Size(137, 16);
+            this.label1.TabIndex = 15;
             this.label1.Text = "Проецировать на Х:";
             // 
             // mapBox
             // 
-            this.mapBox.BackColor = System.Drawing.Color.LightYellow;
+            this.mapBox.BackColor = System.Drawing.Color.Black;
             this.mapBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.mapBox.Location = new System.Drawing.Point(201, 6);
+            this.mapBox.Location = new System.Drawing.Point(207, 21);
             this.mapBox.Name = "mapBox";
             this.mapBox.Size = new System.Drawing.Size(550, 550);
-            this.mapBox.TabIndex = 1;
+            this.mapBox.TabIndex = 12;
             this.mapBox.TabStop = false;
             this.mapBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mapBox_MouseClick);
-            // 
-            // tabController
-            // 
-            this.tabController.Controls.Add(this.vizualizerPage);
-            this.tabController.Controls.Add(this.generatorPage);
-            this.tabController.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabController.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.tabController.Location = new System.Drawing.Point(0, 0);
-            this.tabController.Name = "tabController";
-            this.tabController.SelectedIndex = 0;
-            this.tabController.Size = new System.Drawing.Size(767, 593);
-            this.tabController.TabIndex = 0;
-            // 
-            // generatorPage
-            // 
-            this.generatorPage.BackColor = System.Drawing.SystemColors.Control;
-            this.generatorPage.Controls.Add(this.writeButton);
-            this.generatorPage.Controls.Add(this.removeButton);
-            this.generatorPage.Controls.Add(this.addButton);
-            this.generatorPage.Controls.Add(this.readyPointsBox);
-            this.generatorPage.Controls.Add(this.pointBox);
-            this.generatorPage.Location = new System.Drawing.Point(4, 25);
-            this.generatorPage.Name = "generatorPage";
-            this.generatorPage.Padding = new System.Windows.Forms.Padding(3);
-            this.generatorPage.Size = new System.Drawing.Size(759, 564);
-            this.generatorPage.TabIndex = 2;
-            this.generatorPage.Text = "Заполнить файл точками";
-            // 
-            // writeButton
-            // 
-            this.writeButton.Location = new System.Drawing.Point(321, 519);
-            this.writeButton.Name = "writeButton";
-            this.writeButton.Size = new System.Drawing.Size(195, 36);
-            this.writeButton.TabIndex = 4;
-            this.writeButton.Text = "Записать в файл...";
-            this.writeButton.UseVisualStyleBackColor = true;
-            // 
-            // removeButton
-            // 
-            this.removeButton.Location = new System.Drawing.Point(422, 7);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(94, 26);
-            this.removeButton.TabIndex = 3;
-            this.removeButton.Text = "Удалить";
-            this.removeButton.UseVisualStyleBackColor = true;
-            // 
-            // addButton
-            // 
-            this.addButton.Location = new System.Drawing.Point(321, 6);
-            this.addButton.Name = "addButton";
-            this.addButton.Size = new System.Drawing.Size(95, 27);
-            this.addButton.TabIndex = 2;
-            this.addButton.Text = "Добавить";
-            this.addButton.UseVisualStyleBackColor = true;
-            // 
-            // readyPointsBox
-            // 
-            this.readyPointsBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.readyPointsBox.Location = new System.Drawing.Point(3, 36);
-            this.readyPointsBox.Name = "readyPointsBox";
-            this.readyPointsBox.Size = new System.Drawing.Size(312, 519);
-            this.readyPointsBox.TabIndex = 1;
-            // 
-            // pointBox
-            // 
-            this.pointBox.Location = new System.Drawing.Point(3, 6);
-            this.pointBox.Multiline = true;
-            this.pointBox.Name = "pointBox";
-            this.pointBox.Size = new System.Drawing.Size(312, 27);
-            this.pointBox.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 593);
-            this.Controls.Add(this.tabController);
+            this.ClientSize = new System.Drawing.Size(767, 585);
+            this.Controls.Add(this.clustNumDec);
+            this.Controls.Add(this.clustNumInc);
+            this.Controls.Add(this.clustersNumBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.resetScaleButton);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.yAxisBox);
+            this.Controls.Add(this.xAxisBox);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.mapBox);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Кластеризация точек в n-мерном Евклидовом пространстве";
-            this.vizualizerPage.ResumeLayout(false);
-            this.vizualizerPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mapBox)).EndInit();
-            this.tabController.ResumeLayout(false);
-            this.generatorPage.ResumeLayout(false);
-            this.generatorPage.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabPage vizualizerPage;
-        private System.Windows.Forms.ComboBox clustersNumBox;
+        private System.Windows.Forms.Button clustNumDec;
+        private System.Windows.Forms.Button clustNumInc;
+        private System.Windows.Forms.TextBox clustersNumBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button resetScaleButton;
         private System.Windows.Forms.Button startButton;
@@ -274,12 +210,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox mapBox;
-        private System.Windows.Forms.TabControl tabController;
-        private System.Windows.Forms.TabPage generatorPage;
-        private System.Windows.Forms.Button writeButton;
-        private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.Button addButton;
-        private System.Windows.Forms.Label readyPointsBox;
-        private System.Windows.Forms.TextBox pointBox;
     }
 }
