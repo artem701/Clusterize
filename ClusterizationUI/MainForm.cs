@@ -120,12 +120,18 @@ namespace ClusterizationUI
                     filename = fd.FileName + ".out.txt";
                 else
                 {
-                    Process proc = new Process();
-                    proc.StartInfo.FileName = "Clusterize.exe";
-                    proc.StartInfo.Arguments = "\"" + fd.FileName + "\" \"" + fd.FileName + ".out.txt\"";
-                    proc.Start();
-                    proc.WaitForExit();
-
+                    try
+                    {
+                        Process proc = new Process();
+                        proc.StartInfo.FileName = "Clusterize.exe";
+                        proc.StartInfo.Arguments = "\"" + fd.FileName + "\" \"" + fd.FileName + ".out.txt\"";
+                        proc.Start();
+                        proc.WaitForExit();
+                    }catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка запуска вычислительной подпрограммы: " + ex.Message);
+                        return;
+                    }
                     filename = fd.FileName + ".out.txt";
                 }
             }

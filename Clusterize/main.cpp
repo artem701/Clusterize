@@ -55,14 +55,6 @@ int main(int argc, char* argv[])
 		c->save((argc > 2) ? argv[2] : "out.txt");
 		delete c;
 	}
-	else
-	{
-		cerr << "Пустой входной файл!\n";
-		// Создание пустого выходного файла
-		ofstream ofs;
-		ofs.open((argc > 2) ? argv[2] : "out.txt");
-		ofs.close();
-	}
 
 
 	time(&finish);
