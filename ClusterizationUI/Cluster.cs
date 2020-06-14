@@ -19,15 +19,28 @@ namespace ClusterizationUI
         public static Cluster Load(string filename)
         {
             System.IO.StreamReader sr = new System.IO.StreamReader(filename);
-            Cluster cluster = Load(sr);
-            sr.Close();
+            Cluster cluster;
+            try
+            {
+                 cluster = Load(sr);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                sr.Close();
+            }
             return cluster;
         }
 
         public static Cluster Load(System.IO.StreamReader sr)
         {
             if (sr.EndOfStream)
+            {
                 throw new Exception("Файл для чтения пуст");
+            }
 
             Cluster cluster;
             int c;
