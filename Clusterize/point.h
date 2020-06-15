@@ -8,7 +8,7 @@
 // Кластеризуемый класс точки в n-мерном пространстве
 class Point {
 	std::vector<double> coords;
-	int n;
+	static int n;
 	double weight;
 public:
 	Point();
@@ -20,7 +20,5 @@ public:
 	static Point Average(const Point& a, const Point& b);
 	void flush(std::ofstream&) const;
 
-	int dimensions() const;
-
-	//bool operator <(const Point&) const;
+	static void Init(int dimensions);
 };

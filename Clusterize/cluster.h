@@ -37,9 +37,6 @@ public:
 	// Возвращает центр кластера
 	virtual T mid() const = 0;
 
-	// Возвращает список всех объектов кластера
-	virtual std::list<T> tolist() const = 0;
-
 	// Для вызова из родителя
 	virtual void save(std::ofstream&) const = 0;
 

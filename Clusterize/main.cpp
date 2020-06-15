@@ -29,6 +29,8 @@ int main(int argc, char* argv[])
 	int n; ifs >> n;
 	list<Point> l;
 
+	Point::Init(n);
+
 	cout << "Чтение точек из файла...\n";
 	while (!ifs.eof())
 	{

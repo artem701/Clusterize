@@ -1,5 +1,6 @@
 ﻿#include "point.h"
 
+int Point::n = 0;
 
 Point::Point()
 {
@@ -7,7 +8,15 @@ Point::Point()
 
 Point::Point(const std::vector<double>& coords, double w)
 {
-	this->n = coords.size();
+	if (n < 1)
+	{
+		throw std::exception("Ошибка конструирования Point: не установлена размерность пространства");
+	}
+	if (coords.size() != Point::n)
+	{
+		throw std::exception("Ошибка конструирования Point: неверное количество передаваемых координат");
+	}
+	//this->n = coords.size();
 	this->coords = coords;
 	this->weight = w;
 }
@@ -19,11 +28,13 @@ double Point::operator[](int i) const
 
 double Point::Distance(const Point& a, const Point& b)
 {
+	/*
 	if (a.n != b.n)
 		throw std::exception("Incompatible points in Point::Distance");
+	*/
 
 	double quads = 0.0;
-	for (int i = 0; i < a.n; ++i)
+	for (int i = 0; i < n; ++i)
 		quads += pow(a[i] - b[i], 2.0);
 
 	return sqrt(quads);
@@ -31,9 +42,11 @@ double Point::Distance(const Point& a, const Point& b)
 
 Point Point::Average(const Point& a, const Point& b)
 {
+	/*
 	int n = a.n;
 	if (n != b.n)
 		throw std::exception("Incompatible points in Point::Average");
+	*/
 
 	std::vector<double> mid_coords;
 	mid_coords.resize(n);
@@ -51,7 +64,13 @@ void Point::flush(std::ofstream& ofs) const
 	ofs << coords[n - 1];
 }
 
+void Point::Init(int dimensions)
+{
+	Point::n = dimensions;
+}
+/*
 int Point::dimensions() const
 {
 	return n;
 }
+*/

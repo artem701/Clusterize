@@ -14,7 +14,6 @@ class Leave : public Cluster<T>
 public:
 	Leave(const T&);
 
-	std::list<T> tolist() const override;
 	T mid() const override;
 	void save(std::ofstream&) const override;
 };
@@ -24,12 +23,6 @@ public:
 template<class T>
 inline Leave<T>::Leave(const T & _val) : val(_val)
 {
-}
-
-template<class T>
-inline std::list<T> Leave<T>::tolist() const
-{
-	return std::list<T>(1, val);
 }
 
 template<class T>

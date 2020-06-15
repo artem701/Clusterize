@@ -12,7 +12,6 @@ class Branch : public Cluster<T>
 public:
 	Branch(Cluster<T>* a, Cluster<T>* b);
 
-	std::list<T> tolist() const override;
 	T mid() const override;
 	void save(std::ofstream&) const override;
 
@@ -28,17 +27,6 @@ inline Branch<T>::Branch(Cluster<T>* a, Cluster<T>* b) : average(T())
 
 	// Заранее вычисляем среднее значение кластера
 	average = T::Average(t1->mid(), t2->mid());
-}
-
-template<class T>
-inline std::list<T> Branch<T>::tolist() const
-{
-	std::list<T> l, l2;
-	l = t1->tolist();
-	l2 = t2->tolist();
-	l.insert(l.begin(), l2.begin(), l2.end());
-	
-	return l;
 }
 
 template<class T>

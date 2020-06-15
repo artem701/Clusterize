@@ -342,6 +342,8 @@ namespace ClusterizationUI
             clustersNumBox.Text = num.ToString();
         }
 
+        // recalculate определяет, нужно ли рассчитывать исходное состояние камеры
+        // или достаточно очистить стек масштабирования
         private void resetCamera(bool recalculate = true)
         {
             resetScaleButton.Enabled = false;
