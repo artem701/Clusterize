@@ -45,6 +45,7 @@
             // 
             // clustNumDec
             // 
+            this.clustNumDec.Enabled = false;
             this.clustNumDec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.clustNumDec.Location = new System.Drawing.Point(51, 142);
             this.clustNumDec.Name = "clustNumDec";
@@ -56,6 +57,7 @@
             // 
             // clustNumInc
             // 
+            this.clustNumInc.Enabled = false;
             this.clustNumInc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.clustNumInc.Location = new System.Drawing.Point(155, 142);
             this.clustNumInc.Name = "clustNumInc";
@@ -67,6 +69,7 @@
             // 
             // clustersNumBox
             // 
+            this.clustersNumBox.Enabled = false;
             this.clustersNumBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.clustersNumBox.Location = new System.Drawing.Point(103, 142);
             this.clustersNumBox.Name = "clustersNumBox";

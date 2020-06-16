@@ -166,6 +166,9 @@ namespace ClusterizationUI
             yAxisBox.Text = (dim > 1) ? "2" : "1";
 
             // Включаем элементы управления
+            clustersNumBox.Enabled = true;
+            clustNumInc.Enabled = true;
+            clustNumDec.Enabled = true;
             if (dim > 1)
             {
                 xAxisBox.Enabled = true;

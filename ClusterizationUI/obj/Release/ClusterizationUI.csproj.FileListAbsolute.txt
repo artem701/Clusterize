@@ -17,4 +17,3 @@ C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\Clusterizati
 C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.csproj.CoreCompileInputs.cache
 C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.exe
 C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.pdb
-C:\Users\Artem\source\repos\Clusterize\ClusterizationUI\obj\Release\ClusterizationUI.csprojAssemblyReference.cache
